@@ -11,11 +11,6 @@
 
         //PROPERTIES
 
-        public int MinDamage
-        {
-            get { return _minDamage; }
-            set { _minDamage = value; }
-        }
         public int MaxDamage
         {
             get { return _maxDamage; }
@@ -35,6 +30,22 @@
         {
             get { return _isTwoHanded; }
             set { _isTwoHanded = value; }
+        }
+        public int MinDamage
+        {
+            get { return _minDamage; }
+            set
+            {
+                if (value > 0 && value <= MaxDamage)
+                    {
+                    _minDamage = value;
+                }
+
+                else
+                {
+                    _minDamage = 1;
+                }
+               }
         }
 
         //CONSTRUCTORS

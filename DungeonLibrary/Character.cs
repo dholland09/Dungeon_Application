@@ -19,12 +19,6 @@ namespace DungeonLibrary
        //private int _life;
 
         //PROPERTIES
-        public int Life
-        {
-            get { return _life; }
-            set { _life = value; }
-
-        }
 
         public string Name
         {
@@ -36,7 +30,6 @@ namespace DungeonLibrary
         {
             get { return _hitChance; }
             set { _hitChance = value; }
-
         }
 
         public int Block
@@ -50,14 +43,30 @@ namespace DungeonLibrary
             get { return _maxLife; }
             set { _maxLife = value; }
         }
-        //CONSTRUCTORS
-        public Character(int life, string name, int hitChance, int block, int maxLife)
+        public int Life
         {
-            Life = life;
+            //TODO update this compared to his code
+            get { return _life; }
+            set 
+            { 
+                if (value <= MaxLife)
+                {
+                    _life = value;
+                }
+                else
+                {
+                    _life = MaxLife;
+                }
+            }
+        }
+        //CONSTRUCTORS
+        public Character( string name, int hitChance, int block, int maxLife,int life)
+        {
             Name = name;
             HitChance = hitChance;
             Block = block;
             MaxLife = maxLife;
+            Life = life;
         }
 
         //METHODS
@@ -78,6 +87,7 @@ namespace DungeonLibrary
         }
 
         public override string ToString()
+            //TODO update
         {
             return string.Format($"Life: {Life}\nName: {Name}\nHit Chance: {HitChance}\n Block: {Block}\nMax Life:{MaxLife}");
         }
