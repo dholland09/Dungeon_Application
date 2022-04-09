@@ -8,11 +8,11 @@ namespace DungeonLibrary
 {
     public enum Race
     {
-        Orc = 1,
-        Human = 2,
-        Elf = 3,
-        Dwarf = 4,
-        Seahorse = 5
+        Nurse,
+        RespratoryTherapist,
+        Janitor,
+        CNA,
+        RadiologyTechnologist
 
     }
 }

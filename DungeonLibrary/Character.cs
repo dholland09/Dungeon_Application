@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Character
+    public abstract class Character
     {
         //FIELDS
 
@@ -15,8 +15,7 @@ namespace DungeonLibrary
         private int _hitChance;
         private int _block;
         private int _maxLife;
-       //Ask if there is suppose to be two of these
-       //private int _life;
+       
 
         //PROPERTIES
 
@@ -45,7 +44,7 @@ namespace DungeonLibrary
         }
         public int Life
         {
-            //TODO update this compared to his code
+           
             get { return _life; }
             set 
             { 
@@ -68,26 +67,27 @@ namespace DungeonLibrary
             MaxLife = maxLife;
             Life = life;
         }
+        public Character() { }
 
         //METHODS
 
-        public int CalcBlock()
+        public virtual int CalcBlock()
         {
             return Block;
         }
 
-        public int CalcHitChance()
+        public virtual int CalcHitChance()
         {
             return HitChance;
         }
 
-        public int CalcDamage()
+        public virtual int CalcDamage()
         {
             return 0;
         }
 
         public override string ToString()
-            //TODO update
+            
         {
             return string.Format($"Life: {Life}\nName: {Name}\nHit Chance: {HitChance}\n Block: {Block}\nMax Life:{MaxLife}");
         }
