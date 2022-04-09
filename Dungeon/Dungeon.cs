@@ -11,8 +11,14 @@ namespace Dungeon
     {
         static void Main(string[] args)
         {
-            Console.WriteLine();
-            //TODO Create a Player
+            Console.Title = "Hospital of Horror";
+            Console.WriteLine("Your encounter begins...");
+
+            int score = 0;
+
+            Weapon traumaShears = new Weapon(3, 15, "Trama Shears", 10, WeaponType.Sciccors, false);
+
+            Player player = new Player("Nurse Ratchet", 75, 8, 60, 60, Race.Nurse, traumaShears);
 
             bool quit = false;//main loop
 
@@ -20,7 +26,21 @@ namespace Dungeon
             {
                 Console.WriteLine(GetRoom());
 
-                //TODO Create a Monster
+                DementedPatient patient = new DementedPatient("Ima Pain", 35, 60, 40, 10, 15, 3, "They may look fragile, but they can move quickly");
+
+                EvilTraumaSurgeon surgeon = new EvilTraumaSurgeon("Dr. McClain", 50, 75, 35, 10, 10, 20, "Appears to be exhausted, but is well trained for long hours", 4, 8);
+
+                Anestesiologist anestesiologist = new Anestesiologist("Clif Peda", 75, 75, 40, 20, 10, 35, "High and mighty", true);
+
+                AngryFamilyMember familyMember = new AngryFamilyMember("Karen Squared", 50, 65, 20, 15, 5, 10, "On a rampage", true);
+
+                Monster[] monsters = { patient, surgeon, anestesiologist, familyMember };
+
+                Random rand = new Random();
+                int randomNbr = rand.Next(monsters.Length);
+                Monster monster = monsters[randomNbr];
+
+                Console.WriteLine("\nIn this room you encounter: "+ monster.Name);
               
 
                 bool exit = false;//inner loop
@@ -36,35 +56,45 @@ namespace Dungeon
 
                     //store users input
                     ConsoleKey choice = Console.ReadKey(true).Key;//Executes on key press
+                    Console.Clear();
 
                     switch (choice)
                     {
                         case ConsoleKey.A:
-                            Console.Clear();
+                            Combat.DoBattle(player, monster);
+
+                            if (monster.Life <= 0)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("You killed {0}", monster.Name);
+                                Console.ResetColor();
+                                score++;
+                                exit = true;
+                            }
+                            
                             Console.WriteLine("Attack");
-                            //TODO Create Attack
+                            
 
                             //after combat, if we win, set reload = true
                             break;
 
                         case ConsoleKey.B:
-                            Console.Clear();
-                            Console.WriteLine("Run Away");
-                            //TODO Create Run Away
+                           Console.WriteLine($"{monster.Name} attacks you as you flee!");
+                            Combat.DoAttack(monster, player);
+
+                            Console.WriteLine();
                             exit = true;
                             break;
 
-                        case ConsoleKey.C:
-                            Console.Clear();
-                            Console.WriteLine("Character Info");
-                            //TODO Create Character Info
+                        case ConsoleKey.C:                           
+                            Console.WriteLine(player);
+                            Console.WriteLine("Monsters defeated " + score);
                             break;
 
                         case ConsoleKey.D:
 
                             Console.Clear();
-                            Console.WriteLine("Monster Info");
-                            //TODO Create Monster Info
+                            Console.WriteLine(monster);                            
                             break;
 
                         case ConsoleKey.E:
@@ -81,8 +111,15 @@ namespace Dungeon
                             break;
                     }
 
+                    if (player.Life <= 0)
+                    {
+                        Console.WriteLine("You have been defeated by {0}!", monster.Name);
+                        exit = true;
+                    }
+
                 } while (!exit && !quit);//end inner loop
-                Console.WriteLine();
+                Console.WriteLine("You defeated " + score + " monster" + 
+                    ((score ==1) ? "." : "s."));
 
 
             } while (!quit);//end main loop
@@ -91,8 +128,7 @@ namespace Dungeon
 
 
 
-            //QUSTIONS 
-            //1.Do we need to do a random for the attack? or how do I get it to break out of innerloop for win and both loops for lose?
+          
 
 
 
@@ -105,10 +141,10 @@ namespace Dungeon
         {
             string[] roomDescription =
          {
-            "Room 1",
-            "Room 2",
-            "Room 3",
-            "Room 4"
+            "Blood covered trauma bay. Blinding lights are shining in your eyes.",
+            "Dark, dingy and crowded room in the ICU",
+            "Crowded ER waiting room. Angry patients everywhere.",
+            "Bright and cold hallway."
 
             };//End Room Descriptions
 

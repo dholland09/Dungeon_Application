@@ -8,11 +8,11 @@ namespace DungeonLibrary
 {
     public enum WeaponType
     {
-        RocketLauncer = 1,
-        Sword = 2,
-        Knife = 3,
-        Project = 4,
-        Laser = 5
+        Sciccors,
+        Stethoscope,
+        EndotrachealTube,
+        ChestTube,
+        MopWater
 
     }
 }
