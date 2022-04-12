@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Anestesiologist : Monster
+    public sealed class Anestesiologist : Monster
     {
         public bool IsArrogant { get; set; }
 

@@ -8,7 +8,7 @@ namespace DungeonLibrary
 {
     //TODO Update all descriptions and stuff
     
-    public class Player : Character
+    public sealed class Player : Character
     {
        
         public Race CharacterRace { get; set; }

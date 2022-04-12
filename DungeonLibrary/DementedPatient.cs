@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class DementedPatient : Monster 
+    public sealed class DementedPatient : Monster 
     {
         public DateTime HourChangeBack { get; set; }
 

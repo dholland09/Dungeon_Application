@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class EvilTraumaSurgeon : Monster
+    public sealed class EvilTraumaSurgeon : Monster
     {
 
         public int BonusBlock { get; set; }
